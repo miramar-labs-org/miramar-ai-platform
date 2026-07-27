@@ -29,10 +29,10 @@ User
 miramar CLI
   │
   ├── doctor      — read-only check of cluster prerequisites
-  ├── init        — copies a deployment template to a local directory for customization
+  ├── new         — copies a deployment template to a local directory for customization
   ├── deploy      — deploys one model endpoint via a Helm chart
   ├── validate    — confirms the endpoint is healthy and serving requests
-  └── uninstall   — tears the deployment back down
+  └── undeploy    — tears the deployment back down
         │
         ▼
 Kubernetes API (existing cluster, brought by the user)
@@ -50,7 +50,7 @@ OpenAI-compatible HTTP endpoint
 `internal/template`, see [ADR-003](adr/003-helm-chart-template-factory.md)) is the one
 place a new serving runtime, deployment shape, or future workload type plugs in — not a
 plugin API, not CRDs, not a workflow engine. `deploy --type <name>` and
-`init --type <name>` already take the template type as a value, so adding
+`new --type <name>` already take the template type as a value, so adding
 `serving-sglang`, `serving-triton`, or another future template is adding a
 directory under `templates/`, not new factory logic. This keeps the CLI's surface area
 fixed while what it can deploy grows.
