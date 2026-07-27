@@ -51,7 +51,7 @@ deployment before applying it:
 
 The first concrete workflow this project targets:
 
-> Install and validate an OpenAI-compatible model endpoint on an existing GPU-enabled
+> Deploy and validate an OpenAI-compatible model endpoint on an existing GPU-enabled
 > Kubernetes cluster.
 
 Zero-flag path, using the built-in default (Qwen2.5-1.5B-Instruct on self-hosted k3s):

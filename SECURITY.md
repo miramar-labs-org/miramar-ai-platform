@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-`v0.1.0` is the only release so far and is the current supported version. There is no
+`v0.2.0` is the only release so far and is the current supported version. There is no
 formal long-term support matrix yet — until there are multiple maintained release lines,
 security fixes land on the latest tagged release.
 

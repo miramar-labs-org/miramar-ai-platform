@@ -3,7 +3,7 @@
 This roadmap describes the intended path from an empty scaffold to a working v0.1
 release that delivers one golden path end to end:
 
-> Install and validate an OpenAI-compatible model endpoint on an existing GPU-enabled
+> Deploy and validate an OpenAI-compatible model endpoint on an existing GPU-enabled
 > Kubernetes cluster.
 
 Each release section lists what "done" looks like so scope doesn't drift while building
@@ -48,9 +48,8 @@ Goal: a single documented, reproducible path for one deployment target.
 - ✅ `miramar uninstall` — clean teardown; `--purge-namespace` additionally deletes the
       namespace. Both the default (release-only) and `--purge-namespace` paths validated
       against the live cluster, including confirming GPU memory is freed afterward.
-- ✅ First tagged release with pinned dependency versions — **v0.1.0**. Dependencies
-      pinned via `go.mod`/`go.sum` (no floating versions); see
-      [`CHANGELOG.md`](CHANGELOG.md#010---2026-07-26).
+- ✅ Release 0.1 scope completed, with pinned dependency versions (`go.mod`/`go.sum`,
+      no floating versions); see [`CHANGELOG.md`](CHANGELOG.md#010---2026-07-26).
 
 ## Release 0.2 — improve installation
 
@@ -151,7 +150,7 @@ templates" under Explicit non-goals below. Converged list:
 
 | Template | Status | Purpose |
 | --- | --- | --- |
-| `serving-vllm` | ✅ v0.1.0 | OpenAI-compatible inference (current default) |
+| `serving-vllm` | ✅ Release 0.1 | OpenAI-compatible inference (current default) |
 | `serving-sglang` | ⏳ Release 0.3 | High-performance inference alternative |
 | `serving-triton` | ⏳ Release 0.3 | NVIDIA Triton inference server |
 | `finetune-lora` | ⏳ Release 0.4 | Single-node parameter-efficient fine-tuning. One template, not `finetune-qlora`/`finetune-adapters`/etc. — LoRA, QLoRA, and future PEFT methods are configuration inside this template, not separate template types |

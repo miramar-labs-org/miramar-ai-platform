@@ -22,8 +22,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   worst, even on a list error. Helm release-storage access is itself skipped (WARN)
   rather than checked for real when the target namespace doesn't exist yet, so a
   fresh-cluster `doctor` run never hard-fails before `deploy` gets a chance to create
-  that namespace. Storage-class, secret, and `--json` output remain deferred — see
-  `docs/CURRENT_STATE.md`.
+  that namespace. Required-secret checks, config schema, and `--json` output remain
+  deferred — see `docs/CURRENT_STATE.md`.
 - Colored status output (`doctor`, `deploy`, `validate`, `uninstall`, and top-level
   errors) — green ✓ / yellow ⚠ / red ✗ on a real terminal, falling back to the original
   plain ASCII text when output is piped/redirected or `NO_COLOR` is set.

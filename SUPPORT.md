@@ -1,8 +1,8 @@
 # Support
 
-`v0.1.0` has shipped — see [`CHANGELOG.md`](CHANGELOG.md#010---2026-07-26) for what it
-covers and [`docs/supported-configurations.md`](docs/supported-configurations.md) for
-the exact validated deployment.
+`v0.2.0` is the latest tagged release — see [`CHANGELOG.md`](CHANGELOG.md#020---2026-07-26)
+for what it covers and [`docs/supported-configurations.md`](docs/supported-configurations.md)
+for the exact validated deployment.
 
 ## Getting help
 

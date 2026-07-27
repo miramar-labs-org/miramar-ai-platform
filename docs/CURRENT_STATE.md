@@ -234,7 +234,7 @@ Resolve implementation-local questions in code and tests. Create an ADR only whe
 
 ### 2026-07-26
 
-* Release 0.1 completed and tagged as `v0.1.0`.
+* Release 0.1 scope completed.
 * CE scope boundary clarified: CE deploys to any existing cluster; cluster lifecycle is
   outside this public repo.
 * `PRINCIPLES.md` and CE-facing ADRs are present.
