@@ -180,6 +180,28 @@ Resolve implementation-local questions in code and tests. Create an ADR only whe
 
 ## Handoff log
 
+### 2026-07-26 (latest)
+
+* Enterprise Edition planning and implementation moved into a separate private
+  repository, outside this public repo entirely. See the
+  [Community Edition scope boundary](../ROADMAP.md#community-edition-scope-boundary)
+  for what stays out of CE.
+* This public CE repo's git history was reset to a single root commit
+  (`chore: reset public CE history`) at the point of the split, so no pre-split commit
+  ever referencing EE-adjacent content remains reachable in this now-public repo's
+  history. Verified nothing was lost in that reset: the reset commit's full 71-file tree
+  matches the current working tree exactly, including this session's own work (the
+  `checkHelmReleaseStorage` namespace-missing fix, the Go 1.25.12 toolchain bump).
+* Verified no EE planning/implementation detail leaked into CE: the CE `docs/adr/`
+  index cleanly skips the EE-only ADR numbers with no dangling links, and
+  `ROADMAP.md`'s Community Edition scope boundary section states plainly that detailed
+  commercial-extension planning lives outside this repo.
+* Going forward: any new planning/implementation doc for EE-owned operational
+  capabilities (see [ADR-006](adr/006-ce-ee-operational-scope-boundary.md) and
+  [ADR-016](adr/016-observability-boundary.md) for the boundary) belongs in the EE
+  repo, not here. This CE repo is public; treat every file added to it as public by
+  default.
+
 ### 2026-07-26 (even later)
 
 * External review implemented: fixed a fresh-cluster failure mode where
