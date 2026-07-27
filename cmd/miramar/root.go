@@ -31,10 +31,10 @@ See ROADMAP.md for what's implemented today vs. planned.`,
 
 	cmd.AddCommand(
 		newDoctorCmd(),
-		newInitCmd(),
+		newNewCmd(),
 		newDeployCmd(),
 		newValidateCmd(),
-		newUninstallCmd(),
+		newUndeployCmd(),
 	)
 
 	return cmd

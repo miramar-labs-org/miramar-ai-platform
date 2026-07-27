@@ -49,28 +49,28 @@ prompts to `POST /v1/chat/completions`, reporting pass/fail per prompt.
 Tear it down:
 
 ```
-go run ./cmd/miramar uninstall
+go run ./cmd/miramar undeploy
 ```
 
 This removes the Helm release's resources but leaves the `miramar-ai-platform`
 namespace in place. To remove the namespace too:
 
 ```
-go run ./cmd/miramar uninstall --purge-namespace
+go run ./cmd/miramar undeploy --purge-namespace
 ```
 
 ## Customize-then-deploy path
 
-To deploy a different model, use `miramar init` to copy the template out to a local
+To deploy a different model, use `miramar new` to copy the template out to a local
 directory, edit it, then deploy from that copy instead of the embedded default:
 
 ```
-go run ./cmd/miramar init --model mistralai/Mistral-7B-Instruct-v0.3 --dir /tmp/serving-test
+go run ./cmd/miramar new --model mistralai/Mistral-7B-Instruct-v0.3 --dir /tmp/serving-test
 # optionally edit /tmp/serving-test/values.yaml further by hand — e.g. resources,
 # vllm.gpuMemoryUtilization, probe timing
 go run ./cmd/miramar deploy --chart-dir /tmp/serving-test --wait-timeout 20m
 go run ./cmd/miramar validate
-go run ./cmd/miramar uninstall --purge-namespace
+go run ./cmd/miramar undeploy --purge-namespace
 ```
 
 `--wait-timeout` was raised here because a larger, not-yet-cached model can take longer
@@ -85,5 +85,5 @@ get pod`) against the same release picks up the already-healthy result once it's
   15-minute wait on a warm image cache.
 - Mistral-7B-Instruct-v0.3 (customized `--chart-dir` example above) took over 13 minutes
   for weight download alone on first pull — hence the longer `--wait-timeout` above.
-- GPU memory is confirmed fully released after `uninstall` (no compute processes left on
+- GPU memory is confirmed fully released after `undeploy` (no compute processes left on
   the GPU) in both cases.

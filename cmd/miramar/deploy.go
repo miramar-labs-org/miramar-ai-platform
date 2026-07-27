@@ -30,7 +30,7 @@ model-serving endpoint into the target namespace via the native Helm SDK.
 
 By default it deploys the built-in "serving-vllm" template
 (Qwen/Qwen2.5-1.5B-Instruct). Use --chart-dir to deploy from a directory
-produced by "miramar init" instead.`,
+produced by "miramar new" instead.`,
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if chartDir != "" && cmd.Flags().Changed("type") {
@@ -88,7 +88,7 @@ produced by "miramar init" instead.`,
 	}
 
 	cmd.Flags().StringVar(&templateType, "type", "serving-vllm", "Built-in template type to deploy")
-	cmd.Flags().StringVar(&chartDir, "chart-dir", "", "Deploy from a local chart directory instead of a built-in template (see: miramar init)")
+	cmd.Flags().StringVar(&chartDir, "chart-dir", "", "Deploy from a local chart directory instead of a built-in template (see: miramar new)")
 	cmd.Flags().StringVar(&valuesFile, "values", "", "Additional Helm values file layered on top of the chart defaults")
 	cmd.Flags().StringVar(&model, "model", "", "Override the Hugging Face model id")
 	cmd.Flags().StringVar(&servedModelName, "served-model-name", "", "Override the served model name")

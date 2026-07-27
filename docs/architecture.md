@@ -6,7 +6,7 @@ deliberately scoped smaller than a general-purpose AI platform architecture; bro
 capabilities are deferred until this narrow path is working and validated by real usage
 (see [`ROADMAP.md`](../ROADMAP.md)).
 
-`deploy`, `validate`, `uninstall`, `init`, and `doctor` are implemented and validated
+`deploy`, `validate`, `undeploy`, `new`, and `doctor` are implemented and validated
 against a live cluster (see
 [`docs/supported-configurations.md`](supported-configurations.md)). `doctor` covers API
 connectivity, distribution, schedulable GPU, storage classes, ingress controller,

@@ -10,16 +10,16 @@ import (
 	"github.com/miramar-labs-org/miramar-ai-platform/internal/deployer"
 )
 
-func newUninstallCmd() *cobra.Command {
+func newUndeployCmd() *cobra.Command {
 	var (
 		purgeNamespace bool
 		timeout        time.Duration
 	)
 
 	cmd := &cobra.Command{
-		Use:   "uninstall",
+		Use:   "undeploy",
 		Short: "Tear the deployment back down",
-		Long: `uninstall removes the Helm release from the target namespace. By default the
+		Long: `undeploy removes the Helm release from the target namespace. By default the
 namespace itself is left in place; pass --purge-namespace to delete it too.`,
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -28,18 +28,18 @@ namespace itself is left in place; pass --purge-namespace to delete it too.`,
 				Namespace:  namespaceFlag,
 			})
 			if err != nil {
-				return fmt.Errorf("miramar uninstall: %w", err)
+				return fmt.Errorf("miramar undeploy: %w", err)
 			}
 
 			ctx, cancel := context.WithTimeout(cmd.Context(), timeout)
 			defer cancel()
 
 			if err := client.Uninstall(ctx, releaseNameFlag, purgeNamespace); err != nil {
-				return fmt.Errorf("miramar uninstall: %w", err)
+				return fmt.Errorf("miramar undeploy: %w", err)
 			}
 
 			out := cmd.OutOrStdout()
-			fmt.Fprintln(out, styleOK(fmt.Sprintf("Uninstalled release %q from namespace %q", releaseNameFlag, namespaceFlag)))
+			fmt.Fprintln(out, styleOK(fmt.Sprintf("Undeployed release %q from namespace %q", releaseNameFlag, namespaceFlag)))
 			if purgeNamespace {
 				fmt.Fprintln(out, styleOK(fmt.Sprintf("Namespace %q deleted", namespaceFlag)))
 			}
@@ -47,8 +47,8 @@ namespace itself is left in place; pass --purge-namespace to delete it too.`,
 		},
 	}
 
-	cmd.Flags().BoolVar(&purgeNamespace, "purge-namespace", false, "Also delete the namespace after uninstalling the release")
-	cmd.Flags().DurationVar(&timeout, "timeout", 5*time.Minute, "How long to wait for uninstall/namespace deletion to finish")
+	cmd.Flags().BoolVar(&purgeNamespace, "purge-namespace", false, "Also delete the namespace after undeploying the release")
+	cmd.Flags().DurationVar(&timeout, "timeout", 5*time.Minute, "How long to wait for undeploy/namespace deletion to finish")
 
 	return cmd
 }

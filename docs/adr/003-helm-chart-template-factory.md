@@ -19,7 +19,7 @@ Chart sourcing uses a template-factory pattern, pulled forward from Release 0.3 
 than deferred. Charts live under `templates/<type>/` (one directory per project type —
 today just `templates/serving-vllm/`), embedded into the binary via
 `templates/embed.go`. `miramar deploy --type <type>` (default `serving-vllm`) loads a
-template directly from the embedded filesystem; `miramar init --type <type> --dir <path>`
+template directly from the embedded filesystem; `miramar new --type <type> --dir <path>`
 copies the same template out to a directory the user owns, optionally patching
 `model.id`/`model.servedName` in the copied `values.yaml`; `miramar deploy --chart-dir
 <path>` then deploys from that customized copy. Adding a second project type later means
@@ -29,7 +29,7 @@ no change to the factory logic itself.
 This mirrors the project-template-factory pattern already proven in the author's
 reference platform (`create-project.yaml` + `templates/new-project-<type>/`), with one
 deliberate improvement: that reference pattern does raw `sed` placeholder substitution
-into plain manifests, while `init`'s value-patching here operates on the `values.yaml`
+into plain manifests, while `new`'s value-patching here operates on the `values.yaml`
 AST via `gopkg.in/yaml.v3`'s `Node` API — a structured field patch, not text
 substitution, so comments and key ordering in the copied file are preserved exactly.
 

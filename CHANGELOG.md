@@ -24,12 +24,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   fresh-cluster `doctor` run never hard-fails before `deploy` gets a chance to create
   that namespace. Required-secret checks, config schema, and `--json` output remain
   deferred — see `docs/CURRENT_STATE.md`.
-- Colored status output (`doctor`, `deploy`, `validate`, `uninstall`, and top-level
+- Colored status output (`doctor`, `deploy`, `validate`, `undeploy`, and top-level
   errors) — green ✓ / yellow ⚠ / red ✗ on a real terminal, falling back to the original
   plain ASCII text when output is piped/redirected or `NO_COLOR` is set.
 
 ### Changed
 
+- `miramar init` renamed to `miramar new`, and `miramar uninstall` renamed to `miramar
+  undeploy`. `new`/`undeploy` pair clearly with `deploy` as create/destroy verbs and
+  disambiguate `new`'s actual behavior (copy a template to a local directory for
+  customization) from cluster/environment initialization.
 - Go toolchain bumped to 1.25.12; `golang.org/x/net`, `x/text`, `containerd/containerd`,
   and `moby/spdystream` updated to resolve known-vulnerable transitive dependencies.
 

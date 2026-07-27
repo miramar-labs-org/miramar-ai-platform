@@ -16,7 +16,7 @@ the Kubernetes API and invoke Helm natively instead of shelling out; it compiles
 single static binary per OS/arch, which matters for friction-free distribution to
 enterprise buyers who don't want to install a Python/Node runtime for a
 security-adjacent CLI; and Cobra's subcommand dispatch maps directly onto the
-`doctor`/`install`/`deploy`/`validate`/`uninstall` shape (see
+`doctor`/`new`/`deploy`/`validate`/`undeploy` shape (see
 [`docs/architecture.md`](../architecture.md#components)).
 
 ## Consequences

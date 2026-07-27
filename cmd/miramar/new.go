@@ -8,7 +8,7 @@ import (
 	"github.com/miramar-labs-org/miramar-ai-platform/internal/template"
 )
 
-func newInitCmd() *cobra.Command {
+func newNewCmd() *cobra.Command {
 	var (
 		templateType    string
 		dir             string
@@ -18,9 +18,9 @@ func newInitCmd() *cobra.Command {
 	)
 
 	cmd := &cobra.Command{
-		Use:   "init",
+		Use:   "new",
 		Short: "Copy a deployment template to a local directory for customization",
-		Long: `init copies one of the deployment templates this binary ships with into a
+		Long: `new copies one of the deployment templates this binary ships with into a
 local directory you own, optionally patching the model id and served name in
 its values.yaml. Edit the copy further by hand, then run:
 
@@ -35,10 +35,10 @@ to deploy from the customized copy instead of the built-in default.`,
 			}
 
 			if err := template.Copy(templateType, destDir, force); err != nil {
-				return fmt.Errorf("miramar init: %w", err)
+				return fmt.Errorf("miramar new: %w", err)
 			}
 			if err := template.PatchValues(destDir, model, servedModelName); err != nil {
-				return fmt.Errorf("miramar init: %w", err)
+				return fmt.Errorf("miramar new: %w", err)
 			}
 
 			out := cmd.OutOrStdout()

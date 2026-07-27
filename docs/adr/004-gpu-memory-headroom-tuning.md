@@ -19,5 +19,5 @@ processes, rather than trusting vLLM's own default.
 The default model (Qwen2.5-1.5B-Instruct) and a larger validated model
 (Mistral-7B-Instruct-v0.3) both fit comfortably at `0.75` — see
 [`docs/prerequisites.md`](../prerequisites.md). On a smaller or more heavily-loaded GPU
-this value may need lowering further, via `miramar init` + editing `values.yaml`; the
+this value may need lowering further, via `miramar new` + editing `values.yaml`; the
 value is not auto-detected per-host in v0.1.

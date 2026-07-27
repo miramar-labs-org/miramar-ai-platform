@@ -39,11 +39,11 @@ deployment before applying it:
   observability integrations, target namespace, Helm release storage). Run this first —
   it's how Miramar shows it understands the platform it's deploying to, before it
   touches anything.
-- ✅ `miramar init` — copy a deployment template to a local directory for customization
+- ✅ `miramar new` — copy a deployment template to a local directory for customization
 - ✅ `miramar deploy` — deploy one model endpoint via a Helm chart (embedded default, or a
   customized copy via `--chart-dir`)
 - ✅ `miramar validate` — confirm the endpoint is healthy and serving requests
-- ✅ `miramar uninstall` — tear the deployment back down, optionally purging the namespace
+- ✅ `miramar undeploy` — tear the deployment back down, optionally purging the namespace
 
 ## Golden path
 
@@ -58,18 +58,18 @@ Zero-flag path, using the built-in default (Qwen2.5-1.5B-Instruct on self-hosted
 miramar doctor         # confirm the cluster is ready before touching anything
 miramar deploy         # deploy the default model endpoint
 miramar validate       # confirm the endpoint is healthy and serving
-miramar uninstall      # tear it back down
+miramar undeploy       # tear it back down
 ```
 
 Customize-then-deploy path, for a different model:
 
 ```
 miramar doctor
-miramar init --model mistralai/Mistral-7B-Instruct-v0.3 --dir ./my-model
+miramar new --model mistralai/Mistral-7B-Instruct-v0.3 --dir ./my-model
 # edit ./my-model/values.yaml further by hand if needed
 miramar deploy --chart-dir ./my-model
 miramar validate
-miramar uninstall --purge-namespace
+miramar undeploy --purge-namespace
 ```
 
 Both paths are validated against a live cluster — see

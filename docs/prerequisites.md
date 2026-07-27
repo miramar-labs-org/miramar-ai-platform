@@ -1,7 +1,7 @@
 # Prerequisites (target, v0)
 
 This page states what a user's environment needs for the v0.1 golden path
-(`deploy`/`validate`/`uninstall`/`init`), validated against a real DGX Spark cluster —
+(`deploy`/`validate`/`undeploy`/`new`), validated against a real DGX Spark cluster —
 see [`docs/supported-configurations.md`](supported-configurations.md). `miramar doctor`
 checks API connectivity, distribution, schedulable GPU, target namespace, and Helm
 release-storage access automatically — run it first. It does not yet check storage
@@ -21,7 +21,7 @@ class or secret prerequisites; verify those by hand for now.
   (Qwen2.5-1.5B-Instruct) fits comfortably at this setting; a larger model — Mistral-7B-
   Instruct-v0.3 (~13.5 GiB checkpoint) was validated as a customized `--chart-dir`
   deploy — also fits, but on a smaller or more heavily-loaded GPU this value may need
-  lowering further via `miramar init` + editing `values.yaml`.
+  lowering further via `miramar new` + editing `values.yaml`.
 - Outbound network access from the cluster to pull container images and model weights.
   A cold pull of a multi-GB model can take several minutes to over ten minutes
   (Mistral-7B's weight download alone took ~14 minutes on first pull) — see

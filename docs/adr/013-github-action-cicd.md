@@ -5,12 +5,12 @@
 
 ## Context
 
-Users need a way to run `deploy`/`validate`/`uninstall` from CI without hand-rolling
+Users need a way to run `deploy`/`validate`/`undeploy` from CI without hand-rolling
 workflow steps.
 
 ## Decision
 
-An official reusable GitHub Action wrapping `deploy`/`validate`/`uninstall`, living in
+An official reusable GitHub Action wrapping `deploy`/`validate`/`undeploy`, living in
 this repo.
 
 ## Consequences

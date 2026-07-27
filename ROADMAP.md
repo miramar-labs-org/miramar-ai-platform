@@ -29,15 +29,17 @@ Goal: a single documented, reproducible path for one deployment target.
       design — v0.1 has just only validated the one; see the
       [Community Edition scope boundary](#community-edition-scope-boundary) below
       for the deploy-vs-provision boundary
-- ✅ `miramar init` — copy a deployment template (`templates/<type>/`) to a local
+- ✅ `miramar new` — copy a deployment template (`templates/<type>/`) to a local
       directory for customization, patching `model.id`/`model.servedName` in the copied
       `values.yaml` without disturbing comments or unrelated fields. Pulled forward from
-      Release 0.3 (see the note on that release's `init` bullet below) once the
-      template-factory pattern was chosen for `deploy --type` too.
+      Release 0.3 (see the note on that release's `new` bullet below) once the
+      template-factory pattern was chosen for `deploy --type` too. Named `miramar init`
+      at first release; renamed to `new` within Release 0.2 to disambiguate "create a
+      local customizable copy" from cluster/environment initialization.
 - ✅ `miramar deploy` — deploy one model endpoint via a Helm chart. Chart sourcing uses
-      the same template-factory pattern as `init`: `--type serving-vllm` (default) loads
+      the same template-factory pattern as `new`: `--type serving-vllm` (default) loads
       the embedded template, or `--chart-dir <path>` loads a customized copy produced by
-      `init`. Validated end to end on self-hosted k3s (DGX Spark) with both the
+      `new`. Validated end to end on self-hosted k3s (DGX Spark) with both the
       zero-flag default (Qwen2.5-1.5B-Instruct) and a customized `--chart-dir` copy
       (Mistral-7B-Instruct-v0.3).
 - ✅ `miramar validate` — smoke-test the endpoint (poll for a ready pod → `GET
@@ -45,9 +47,11 @@ Goal: a single documented, reproducible path for one deployment target.
       responses). The deploy-then-poll-then-smoke-test shape mirrors a pattern already
       validated in the author's reference platform, generalized to not assume any
       particular org/cluster naming.
-- ✅ `miramar uninstall` — clean teardown; `--purge-namespace` additionally deletes the
+- ✅ `miramar undeploy` — clean teardown; `--purge-namespace` additionally deletes the
       namespace. Both the default (release-only) and `--purge-namespace` paths validated
       against the live cluster, including confirming GPU memory is freed afterward.
+      Named `miramar uninstall` at first release; renamed to `undeploy` within Release
+      0.2 to pair as the inverse of `deploy`.
 - ✅ Release 0.1 scope completed, with pinned dependency versions (`go.mod`/`go.sum`,
       no floating versions); see [`CHANGELOG.md`](CHANGELOG.md#010---2026-07-26).
 
@@ -84,9 +88,9 @@ anything. It's the first command a new user should run, before `deploy`.
 
 Goal: make it easy to go from "one model works" to "my model works."
 
-- ✅ Project/config generator for a new model deployment (`miramar init`) — delivered
+- ✅ Project/config generator for a new model deployment (`miramar new`) — delivered
       ahead of schedule in Release 0.1 as part of the template-factory pattern; see that
-      release's `init` bullet above
+      release's `new` bullet above
 - ⏳ Standard metadata for a deployed model (name, runtime, resource footprint)
 - ⏳ Additional serving runtimes — `serving-sglang` and `serving-triton` (see the
       [CE template catalog](#ce-template-catalog) below)
@@ -132,10 +136,10 @@ per template, never a platform. Every template follows the identical lifecycle
 regardless of type:
 
 ```bash
-miramar init --type <type>   # optional, for customization
+miramar new --type <type>   # optional, for customization
 miramar deploy --type <type>
 miramar validate
-miramar uninstall
+miramar undeploy
 ```
 
 Naming convention: `<category>-<implementation>` (e.g. `serving-vllm`), so the type
@@ -177,7 +181,7 @@ no target dates (this is a solo/early-stage project, not a funded startup with a
 calendar):
 
 - ⏳ First external user installs the CLI and completes the golden path
-      (`init` → `deploy` → `validate` → `uninstall`) outside the author's own
+      (`new` → `deploy` → `validate` → `undeploy`) outside the author's own
       environment
 - ⏳ First design partner — someone using CE for real work, giving ongoing feedback
 - ⏳ First deployment outside the author's lab

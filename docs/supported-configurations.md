@@ -2,15 +2,15 @@
 
 This matrix tracks exactly what's been tested, not what's theoretically possible. A
 component listed here does not mean it works in general — it means this exact
-combination was validated end to end (`deploy` → `validate` → `uninstall`, both the
-embedded-default and `init`-produced `--chart-dir` paths).
+combination was validated end to end (`deploy` → `validate` → `undeploy`, both the
+embedded-default and `new`-produced `--chart-dir` paths).
 
 | Component               | Status |
 | ------------------------ | ------ |
 | Kubernetes distribution  | ✅ **Validated** — k3s. Other distributions are compatible by design, not yet validated — see the matrix below |
 | GPU                      | ✅ **Validated** — NVIDIA GB10 (DGX Spark, unified host/GPU memory) |
 | Serving runtime          | ✅ **Validated** — vLLM (`vllm/vllm-openai:latest`) |
-| Installation method      | ✅ **Validated** — Helm, via the `miramar` CLI's own Helm SDK integration (embedded template and `init`-produced `--chart-dir` copy both tested) |
+| Installation method      | ✅ **Validated** — Helm, via the `miramar` CLI's own Helm SDK integration (embedded template and `new`-produced `--chart-dir` copy both tested) |
 
 Models validated on this configuration: `Qwen/Qwen2.5-1.5B-Instruct` (built-in default)
 and `mistralai/Mistral-7B-Instruct-v0.3` (customized copy, see

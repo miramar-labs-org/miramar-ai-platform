@@ -23,10 +23,10 @@ priority" below.
 
 Implemented commands:
 
-* ✅ `miramar init`
+* ✅ `miramar new`
 * ✅ `miramar deploy`
 * ✅ `miramar validate`
-* ✅ `miramar uninstall`
+* ✅ `miramar undeploy`
 * ✅ `miramar doctor` (flagship Release 0.2 check set — see "Immediate priority" below
   for what remains)
 
@@ -38,16 +38,16 @@ The validated workflow is:
 miramar doctor
 miramar deploy
 miramar validate
-miramar uninstall
+miramar undeploy
 ```
 
 A customized deployment can be generated and deployed with:
 
 ```bash
-miramar init --model <model-id> --dir ./my-model
+miramar new --model <model-id> --dir ./my-model
 miramar deploy --chart-dir ./my-model
 miramar validate
-miramar uninstall --purge-namespace
+miramar undeploy --purge-namespace
 ```
 
 See `README.md` for the user-facing workflow and `docs/supported-configurations.md` for the exact validated environment.
@@ -63,8 +63,8 @@ The following have been validated end to end on the author’s self-hosted k3s c
 * Endpoint readiness polling
 * `GET /v1/models`
 * `POST /v1/chat/completions`
-* Release-only uninstall
-* Namespace-purge uninstall
+* Release-only undeploy
+* Namespace-purge undeploy
 * GPU memory release after teardown
 * `miramar doctor`'s full v0.2 check set: API connectivity, distribution detection,
   schedulable-GPU detection, storage-class discovery, ingress-controller discovery,
