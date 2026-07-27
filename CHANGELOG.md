@@ -6,15 +6,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-07-26
+
 ### Added
 
-- `miramar doctor` — first vertical slice: read-only preflight checks for Kubernetes
-  API connectivity, cluster distribution (informational), schedulable GPU, target
-  namespace, and Helm release-storage access. Storage-class and required-secret checks
-  are not yet implemented — see `docs/CURRENT_STATE.md`.
+- `miramar doctor` — flagship Release 0.2 capability: read-only preflight checks run
+  before `deploy` touches anything. Covers Kubernetes API connectivity, cluster
+  distribution (informational), schedulable GPU, storage-class discovery, ingress-
+  controller discovery, standard observability-integration discovery (metrics-server,
+  Prometheus Operator, OpenTelemetry Operator — see
+  [ADR-016](docs/adr/016-observability-boundary.md)), target-namespace access, and Helm
+  release-storage access. Only API connectivity, schedulable GPU, target-namespace
+  access, and Helm release-storage access can FAIL; storage-class, ingress-controller,
+  and observability-integration discovery are informational only and report WARN at
+  worst, even on a list error. Helm release-storage access is itself skipped (WARN)
+  rather than checked for real when the target namespace doesn't exist yet, so a
+  fresh-cluster `doctor` run never hard-fails before `deploy` gets a chance to create
+  that namespace. Storage-class, secret, and `--json` output remain deferred — see
+  `docs/CURRENT_STATE.md`.
 - Colored status output (`doctor`, `deploy`, `validate`, `uninstall`, and top-level
   errors) — green ✓ / yellow ⚠ / red ✗ on a real terminal, falling back to the original
   plain ASCII text when output is piped/redirected or `NO_COLOR` is set.
+
+### Changed
+
+- Go toolchain bumped to 1.25.12; `golang.org/x/net`, `x/text`, `containerd/containerd`,
+  and `moby/spdystream` updated to resolve known-vulnerable transitive dependencies.
 
 ## [0.1.0] - 2026-07-26
 

@@ -14,9 +14,12 @@ Update this file when a meaningful implementation milestone is completed or when
 
 ## Current release
 
-Latest tagged release: `v0.1.0`
+Latest tagged release: `v0.2.0` (doctor's flagship checkset; see `CHANGELOG.md`)
 
-Release 0.1 is complete according to `ROADMAP.md`.
+Release 0.1 is complete according to `ROADMAP.md`. Release 0.2's flagship `doctor`
+capability shipped in `v0.2.0`; the remaining Release 0.2 items (secret checks, config
+schema, failure diagnostics, installation profiles) are still open — see "Immediate
+priority" below.
 
 Implemented commands:
 
