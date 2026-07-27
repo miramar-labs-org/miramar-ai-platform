@@ -89,7 +89,8 @@ Goal: make it easy to go from "one model works" to "my model works."
       ahead of schedule in Release 0.1 as part of the template-factory pattern; see that
       release's `init` bullet above
 - ⏳ Standard metadata for a deployed model (name, runtime, resource footprint)
-- ⏳ Support a second serving runtime
+- ⏳ Additional serving runtimes — `serving-sglang` and `serving-triton` (see the
+      [CE template catalog](#ce-template-catalog) below)
 - ⏳ Documented, tested upgrade path between CLI versions
 
 CE can already deploy to any existing cluster in principle — see the
@@ -119,8 +120,55 @@ speculative feature-building.
       context, but a missing W&B/LangSmith integration must never produce a FAIL.
 - ⏳ Basic policy controls (e.g. resource limits, allowed namespaces)
 - ⏳ Documented, tested upgrade procedure between platform versions
+- ⏳ `finetune-lora` and `eval` templates, completing the train → serve → evaluate
+      lifecycle (see the [CE template catalog](#ce-template-catalog) below)
 - ⏳ Whatever the first two or three real users actually ask for — deliberately left
       unspecified until there are real users to ask
+
+## CE template catalog
+
+Templates are Miramar's extension mechanism (see
+[ADR-003](docs/adr/003-helm-chart-template-factory.md)) — CE deploys **one workload**
+per template, never a platform. Every template follows the identical lifecycle
+regardless of type:
+
+```bash
+miramar init --type <type>   # optional, for customization
+miramar deploy --type <type>
+miramar validate
+miramar uninstall
+```
+
+Naming convention: `<category>-<implementation>` (e.g. `serving-vllm`), so the type
+name itself declares both the workload category and which implementation backs it.
+This leaves room for future categories (`ingest-*`, `benchmark-*`, and similar) without
+committing to any of them now. `eval` is the one exception — evaluation isn't tied to a
+specific implementation the way serving/fine-tuning are, so it stays unprefixed unless
+a second evaluation implementation ever shows up.
+
+The catalog stays deliberately small and opinionated — see "A marketplace of
+templates" under Explicit non-goals below. Converged list:
+
+| Template | Status | Purpose |
+| --- | --- | --- |
+| `serving-vllm` | ✅ v0.1.0 | OpenAI-compatible inference (current default) |
+| `serving-sglang` | ⏳ Release 0.3 | High-performance inference alternative |
+| `serving-triton` | ⏳ Release 0.3 | NVIDIA Triton inference server |
+| `finetune-lora` | ⏳ Release 0.4 | Single-node parameter-efficient fine-tuning. One template, not `finetune-qlora`/`finetune-adapters`/etc. — LoRA, QLoRA, and future PEFT methods are configuration inside this template, not separate template types |
+| `eval` | ⏳ Release 0.4 | Lightweight, single-node model evaluation (lm-eval, custom evals); completes the train → serve → evaluate lifecycle |
+| `serving-ollama` | Postponed | Lightweight local/open-source model serving — deferred until real user demand; less aligned with CE's Kubernetes-native identity than vLLM/SGLang/Triton |
+| `serving-llamacpp` | Postponed | CPU/edge deployment via llama.cpp — same rationale as `serving-ollama` |
+
+Out of scope for this catalog: template types that orchestrate multiple services or
+represent ongoing operational ownership rather than a single deployable workload —
+multi-service AI platforms, distributed training or optimization workflows, and
+managed operational systems. These are platforms, not workloads, and fall on the
+operational-ownership side of the
+[Community Edition scope boundary](#community-edition-scope-boundary) below.
+
+Avoid these as template names even for future categories: `training` and `pipeline`
+(too broad to signal what's actually deployed), `rag` (in practice several services,
+not one), `agent` (names a framework, not a workload).
 
 ## Adoption milestones
 
