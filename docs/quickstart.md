@@ -3,7 +3,7 @@
 This is the real, tested v0.1 golden path, validated against a live cluster
 (self-hosted k3s on a DGX Spark — see
 [`docs/supported-configurations.md`](supported-configurations.md)).
-`miramar install` doesn't exist yet. Run `miramar doctor` first — it read-only checks
+Run `miramar doctor` first — it read-only checks
 that a working GPU-enabled cluster and `kubectl` access are already in place, and reports
 what it found about storage, ingress, and observability integrations on the cluster; see
 [`docs/prerequisites.md`](prerequisites.md) for what it expects.

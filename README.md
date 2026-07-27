@@ -45,8 +45,6 @@ deployment before applying it:
 - ✅ `miramar validate` — confirm the endpoint is healthy and serving requests
 - ✅ `miramar uninstall` — tear the deployment back down, optionally purging the namespace
 
-🚧 `install` remains a stub — see [`ROADMAP.md`](ROADMAP.md) Release 0.2.
-
 ## Golden path
 
 The first concrete workflow this project targets:

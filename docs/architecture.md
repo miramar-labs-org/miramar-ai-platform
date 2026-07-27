@@ -18,8 +18,7 @@ informational or warning-level only, even on a list error. If the target namespa
 doesn't exist yet, the Helm release-storage check is skipped (WARN) rather than run for
 real, since `deploy` creates the namespace itself and some clusters only grant
 namespace-scoped RBAC once it exists. Required-secret checks are
-not yet implemented, since no template currently declares one. `install` remains a
-stub — see `ROADMAP.md` Release 0.2.
+not yet implemented, since no template currently declares one.
 
 ## Components
 
@@ -30,7 +29,6 @@ User
 miramar CLI
   │
   ├── doctor      — read-only check of cluster prerequisites
-  ├── install     — installs platform-side components (not yet implemented)
   ├── init        — copies a deployment template to a local directory for customization
   ├── deploy      — deploys one model endpoint via a Helm chart
   ├── validate    — confirms the endpoint is healthy and serving requests

@@ -17,7 +17,7 @@ var (
 func newRootCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "miramar",
-		Short: "Install and validate an OpenAI-compatible model endpoint on an existing Kubernetes cluster",
+		Short: "Deploy and validate an OpenAI-compatible model endpoint on an existing Kubernetes cluster",
 		Long: `miramar deploys and validates one model-serving endpoint on a GPU-enabled
 Kubernetes cluster you already have access to. It does not provision clusters,
 GPU drivers, or node pools.
@@ -33,7 +33,6 @@ See ROADMAP.md for what's implemented today vs. planned.`,
 
 	cmd.AddCommand(
 		newDoctorCmd(),
-		newInstallCmd(),
 		newInitCmd(),
 		newDeployCmd(),
 		newValidateCmd(),

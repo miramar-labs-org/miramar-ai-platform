@@ -30,10 +30,6 @@ Implemented commands:
 * ✅ `miramar doctor` (flagship Release 0.2 check set — see "Immediate priority" below
   for what remains)
 
-Stub or planned commands:
-
-* 🚧 `miramar install`
-
 ## Current golden path
 
 The validated workflow is:
