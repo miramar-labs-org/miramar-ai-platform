@@ -35,6 +35,7 @@ Implemented commands:
 The validated workflow is:
 
 ```bash
+miramar doctor
 miramar deploy
 miramar validate
 miramar uninstall

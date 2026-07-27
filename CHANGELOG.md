@@ -33,6 +33,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Go toolchain bumped to 1.25.12; `golang.org/x/net`, `x/text`, `containerd/containerd`,
   and `moby/spdystream` updated to resolve known-vulnerable transitive dependencies.
 
+### Removed
+
+- `miramar install` — removed the always-failing stub subcommand; no roadmap release
+  committed to implementing it, and `deploy` already creates the target namespace.
+
 ## [0.1.0] - 2026-07-26
 
 ### Added

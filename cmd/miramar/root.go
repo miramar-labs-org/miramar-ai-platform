@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -40,10 +38,4 @@ See ROADMAP.md for what's implemented today vs. planned.`,
 	)
 
 	return cmd
-}
-
-// notImplemented is the shared stub body for every subcommand until its real
-// implementation lands. It fails loudly rather than silently succeeding.
-func notImplemented(subcommand string) error {
-	return fmt.Errorf("miramar %s: not yet implemented — see ROADMAP.md", subcommand)
 }
