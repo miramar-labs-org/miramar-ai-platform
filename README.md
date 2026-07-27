@@ -45,38 +45,19 @@ deployment before applying it:
 - ✅ `miramar validate` — confirm the endpoint is healthy and serving requests
 - ✅ `miramar undeploy` — tear the deployment back down, optionally purging the namespace
 
-## Golden path
-
-The first concrete workflow this project targets:
-
-> Deploy and validate an OpenAI-compatible model endpoint on an existing GPU-enabled
-> Kubernetes cluster.
-
-Zero-flag path, using the built-in default (Qwen2.5-1.5B-Instruct on self-hosted k3s):
+## Quickstart
 
 ```
-miramar doctor         # confirm the cluster is ready before touching anything
-miramar deploy         # deploy the default model endpoint
-miramar validate       # confirm the endpoint is healthy and serving
-miramar undeploy       # tear it back down
+miramar doctor      # confirm the cluster is ready before touching anything
+miramar deploy      # deploy a model endpoint
+miramar validate    # confirm the endpoint is healthy and serving
+miramar undeploy    # tear it back down
 ```
 
-Customize-then-deploy path, for a different model:
-
-```
-miramar doctor
-miramar new --model mistralai/Mistral-7B-Instruct-v0.3 --dir ./my-model
-# edit ./my-model/values.yaml further by hand if needed
-miramar deploy --chart-dir ./my-model
-miramar validate
-miramar undeploy --purge-namespace
-```
-
-Both paths are validated against a live cluster — see
-[`docs/supported-configurations.md`](docs/supported-configurations.md). See
-[`ROADMAP.md`](ROADMAP.md) for what's still ahead,
-[`docs/architecture.md`](docs/architecture.md) for the shape of the system, and
-[`PRINCIPLES.md`](PRINCIPLES.md) for the philosophy behind the design choices.
+See [`docs/quickstart.md`](docs/quickstart.md) for the full walkthrough, including
+customizing the deployment before applying it, and
+[`docs/supported-configurations.md`](docs/supported-configurations.md) for exactly what's
+been validated end to end.
 
 ## What this is not (yet)
 
