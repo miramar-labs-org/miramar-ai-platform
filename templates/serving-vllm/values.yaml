@@ -1,0 +1,68 @@
+# Default values for the serving-vllm template.
+# Concrete, valid defaults — this file must work standalone via
+# `miramar deploy` with zero flags, with no placeholder substitution step.
+
+model:
+  # Hugging Face model id. Must be ungated for the zero-flag path to work
+  # out of the box (no token/secret wiring exists yet).
+  id: Qwen/Qwen2.5-1.5B-Instruct
+  # Name the model is served as under /v1/models and /v1/chat/completions.
+  servedName: qwen2.5-1.5b-instruct
+  # Hook for a future gated-model path — not wired up yet.
+  # hfTokenSecretName: ""
+
+image:
+  repository: vllm/vllm-openai
+  tag: latest
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+vllm:
+  dtype: auto
+  # DGX Spark's GB10 uses unified memory shared with the host — vLLM measures
+  # this as ~122GiB total but only ~105GiB free at boot, so 0.90 overcommits
+  # and the engine refuses to start. 0.75 stays under the ~100GiB effective
+  # GPU budget with headroom for other host processes.
+  gpuMemoryUtilization: "0.75"
+  maxModelLen: "4096"
+  # Extra raw args appended to the vllm serve command, e.g. ["--enforce-eager"].
+  extraArgs: []
+
+resources:
+  requests:
+    cpu: "4"
+    memory: "16Gi"
+    nvidia.com/gpu: "1"
+  limits:
+    nvidia.com/gpu: "1"
+
+service:
+  type: ClusterIP
+  port: 8000
+
+gpu:
+  toleration:
+    key: nvidia.com/gpu
+    operator: Exists
+    effect: NoSchedule
+
+probes:
+  # startupProbe gates readiness/liveness until the app is actually up, so
+  # neither of them can kill the container mid model-download or mid CUDA
+  # graph compile — cold start varies a lot by model size and, on first run
+  # per node, by whether kernels are already compiled. failureThreshold *
+  # periodSeconds below allows up to 30 minutes before giving up entirely.
+  startup:
+    initialDelaySeconds: 10
+    periodSeconds: 20
+    timeoutSeconds: 10
+    failureThreshold: 90
+  readiness:
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 30
+  liveness:
+    periodSeconds: 20
+    timeoutSeconds: 10
+    failureThreshold: 6

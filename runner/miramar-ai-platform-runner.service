@@ -1,0 +1,21 @@
+[Unit]
+Description=Miramar AI Platform GitHub Actions Runner
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h
+EnvironmentFile=%h/.config/systemd/user/miramar-ai-platform-runner.env
+# Stop any stale container before launching (idempotent, failure ignored)
+ExecStartPre=-%h/git-miramar-labs-org/miramar-ai-platform/runner/stop-runner.sh
+ExecStart=%h/git-miramar-labs-org/miramar-ai-platform/runner/launch-runner.sh
+ExecStop=%h/git-miramar-labs-org/miramar-ai-platform/runner/stop-runner.sh
+Restart=on-failure
+# Delay handles Docker not being ready immediately on boot
+RestartSec=10
+# stop-runner.sh sends SIGTERM and waits 30s for deregistration; allow some headroom
+TimeoutStopSec=40
+
+[Install]
+WantedBy=default.target

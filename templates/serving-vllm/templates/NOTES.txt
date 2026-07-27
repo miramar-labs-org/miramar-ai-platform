@@ -1,0 +1,4 @@
+{{ .Release.Name }} is deploying {{ .Values.model.id }} as "{{ .Values.model.servedName }}".
+
+Run `miramar validate` to wait for the endpoint to become ready and send a
+smoke-test request.

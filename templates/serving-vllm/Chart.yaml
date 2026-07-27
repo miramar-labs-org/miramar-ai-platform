@@ -1,0 +1,6 @@
+apiVersion: v2
+name: serving-vllm
+description: Serve one OpenAI-compatible model endpoint with vLLM
+type: application
+version: 0.1.0
+appVersion: "latest"
