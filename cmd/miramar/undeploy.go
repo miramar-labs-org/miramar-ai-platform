@@ -7,7 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/miramar-labs-org/miramar-ai-platform/internal/deployer"
+	"github.com/miramar-labs-org/miramar-ai-platform-common/deployer"
 )
 
 func newUndeployCmd() *cobra.Command {

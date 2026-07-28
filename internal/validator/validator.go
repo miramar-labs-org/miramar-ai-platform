@@ -14,7 +14,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes"
 
-	"github.com/miramar-labs-org/miramar-ai-platform/internal/k8sclient"
+	"github.com/miramar-labs-org/miramar-ai-platform-common/k8sclient"
 )
 
 // Options configures one validation run.

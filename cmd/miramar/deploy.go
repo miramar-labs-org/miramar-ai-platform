@@ -8,7 +8,7 @@ import (
 	"helm.sh/helm/v3/pkg/chart"
 	"helm.sh/helm/v3/pkg/chartutil"
 
-	"github.com/miramar-labs-org/miramar-ai-platform/internal/deployer"
+	"github.com/miramar-labs-org/miramar-ai-platform-common/deployer"
 	"github.com/miramar-labs-org/miramar-ai-platform/internal/template"
 )
 

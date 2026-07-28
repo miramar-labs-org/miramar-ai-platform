@@ -22,7 +22,7 @@ import (
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 	"k8s.io/client-go/kubernetes"
 
-	"github.com/miramar-labs-org/miramar-ai-platform/internal/k8sclient"
+	"github.com/miramar-labs-org/miramar-ai-platform-common/k8sclient"
 )
 
 // Status is the outcome of one check.
