@@ -6,6 +6,11 @@ its own new ADR that supersedes the old one, so the history stays honest. For th
 running list of what's built vs. planned, see [`../../ROADMAP.md`](../../ROADMAP.md);
 for durable project-wide philosophy, see [`../../PRINCIPLES.md`](../../PRINCIPLES.md).
 
+This repo's ADR numbers are their own independent sequence, not a shared range with the
+private EE repo's own `docs/adr/` (currently numbered from 008). Before assigning a new
+number here, check that EE repo's ADR index too — this repo's own ADR-013 once collided
+with EE's ADR-013 on unrelated topics before EE's was renumbered to ADR-017.
+
 | ADR | Title | Status |
 | --- | --- | --- |
 | [001](001-go-cli-language.md) | CLI implementation language: Go | ✅ Accepted |
