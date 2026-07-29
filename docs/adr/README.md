@@ -22,3 +22,4 @@ with EE's ADR-013 on unrelated topics before EE's was renumbered to ADR-017.
 | [007](007-kubernetes-api-abstraction.md) | CE deploys to any existing Kubernetes cluster; EE owns cluster lifecycle | ✅ Accepted |
 | [013](013-github-action-cicd.md) | CI/CD: official reusable GitHub Action | ✅ Accepted |
 | [016](016-observability-boundary.md) | Observability boundary: standard signals in CE, managed operations in EE | ✅ Accepted |
+| [018](018-onprem-singleton-cloud-one-to-many.md) | On-prem infra is a shared singleton; cloud platforms are one-to-many | ✅ Accepted |
